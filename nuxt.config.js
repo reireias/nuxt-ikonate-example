@@ -68,6 +68,19 @@ export default {
           exclude: /(node_modules)/
         })
       }
+      // vue-svg-inline-loader
+      const vueRule = config.module.rules.find(rule => rule.test.test('.vue'))
+      vueRule.use = [
+        {
+          loader: vueRule.loader,
+          options: vueRule.options
+        },
+        {
+          loader: 'vue-svg-inline-loader'
+        }
+      ]
+      delete vueRule.loader
+      delete vueRule.options
     }
   }
 }
